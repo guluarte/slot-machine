@@ -1,0 +1,11 @@
+.reel { 
+  display: inline-block;
+  width: 128px;
+  height: 350px;
+  overflow: hidden;
+  background: #fff url(./reel.png) repeat-y;
+  will-change: backgroundPosition;
+  transition: 0.3s background-position ease-in-out;
+  padding: 0 80px;
+  transform: translateZ(0);
+}
