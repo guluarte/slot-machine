@@ -1,6 +1,4 @@
-export const START_SPINNING = "START_SPINNING";
-export const STOP_SPINNING = "STOP_SPINNING";
-export const SPINNING = "SPINNING";
+import { START_SPINNING, STOP_SPINNING, SPINNING } from "../constants";
 
 export const stopSpinning = () => ({
   type: STOP_SPINNING

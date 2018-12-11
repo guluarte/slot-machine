@@ -9,12 +9,16 @@ import reducer from "./reducers";
 import "./index.css";
 import { SlotMachine } from "./containers";
 import * as serviceWorker from "./serviceWorker";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import { casinoTheme } from "./themes/casino";
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>
-    <SlotMachine />
+        <MuiThemeProvider theme={casinoTheme}>
+      <SlotMachine />
+    </MuiThemeProvider>cc
   </Provider>,
   document.getElementById("root")
 );

@@ -1,22 +1,21 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from "react";
-import { START_SPINNING, SPINNING } from "../../actions";
+import { TOP, MIDDLE, BOTTOM, START_SPINNING, FIXED } from "../../constants";
 import "./Reel.css";
-import BAR from "./BAR.png";
-import BAR_2X from "./2xBAR.png";
-import BAR_3X from "./3XBAR.png";
-import SEVEN from "./7.png";
-import CHERRY from "./Cherry.png";
 
-// const SPACE = "SPACE";
+const positions = {
+  BAR: [790, 880, [980, 50]],
+  BAR3X: [[50, 980], 140, 230],
+  CHERRY: [230, 320, 410],
+  SEVEN: [410, 510, 610],
+  BAR2X: [610, 690, 790]
+};
 
 export class Reel extends Component {
   constructor(props) {
     super(props);
-    this.items = [BAR_3X, BAR, BAR_2X, SEVEN, CHERRY];
     this.state = {
-      status: props.status,
-      pos: 0
+      pos: Math.floor(Math.random() * 1000)
     };
     this.delay = props.delay;
     this.intervalMs = props.intervalMs;
@@ -27,48 +26,113 @@ export class Reel extends Component {
     this.tick();
   }
 
-  nextItem(index) {
-    return ++index % this.items.length;
-  }
-
   tick() {
-    const item1 = this.nextItem(
-      this.state.item1 || Math.floor(Math.random() * this.items.length)
-    );
-    const item2 = this.nextItem(this.state.item2 || item1);
-    const item3 = this.nextItem(this.state.item3 || item2);
     this.setState({
       ...this.state,
       completed: false,
-      item1,
-      item2,
-      item3,
-      pos: this.state.pos + 100
+      pos: this.state.pos + Math.floor(Math.random() * 1000)
     });
   }
 
+  getItemsInWinningPosition(landingPosition) {
+    const items = [null, null, null];
+    for (const key in positions) {
+      if (positions.hasOwnProperty(key)) {
+        const elements = positions[key];
+        for (let index = 0; index < elements.length; index++) {
+          const item = elements[index];
+          if (item instanceof Array) {
+            for (const innerItem of item) {
+              if (innerItem === landingPosition) {
+                items[index] = key;
+              }
+            }
+          } else {
+            if (item === landingPosition) {
+              items[index] = key;
+            }
+          }
+        }
+      }
+    }
+
+    return items;
+  }
+
   start() {
-    const interValHandler = setInterval(() => this.tick(), this.intervalMs);
+    let symbol = "";
+    let landingPosition = 0;
+
+    if (this.props.mode && this.props.mode === FIXED) {
+      symbol = positions[this.props.symbol];
+
+      switch (this.props.position) {
+        case TOP:
+          landingPosition =
+            symbol[0] instanceof Array ? symbol[0][0] : symbol[0];
+          break;
+
+        case MIDDLE:
+          landingPosition =
+            symbol[1] instanceof Array ? symbol[1][0] : symbol[1];
+          break;
+
+        case BOTTOM:
+          landingPosition =
+            symbol[2] instanceof Array ? symbol[2][0] : symbol[2];
+          break;
+
+        default:
+          break;
+      }
+    } else {
+      const symbols = Object.keys(positions)[Math.floor(Math.random() * 4)];
+
+      symbol = positions[symbols];
+      const randomPosition = symbol[Math.floor(Math.random() * 3)];
+
+      landingPosition =
+        randomPosition instanceof Array ? randomPosition[0] : randomPosition;
+    }
+
+    const interValHandler = setInterval(() => this.tick(), 50);
     setTimeout(() => {
       clearInterval(interValHandler);
+
       this.setState({
         ...this.state,
-        status: SPINNING,
-        completed: true
+        pos: landingPosition
       });
-      this.onFinish(this.state.item1, this.state.item2, this.state.item3);
+
+      const [top, middle, bottom] = this.getItemsInWinningPosition(
+        landingPosition
+      );
+
+      this.onFinish(top, middle, bottom);
     }, this.delay);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.status === START_SPINNING) {
+    if (
+      nextProps.status === START_SPINNING &&
+      this.props.status !== START_SPINNING
+    ) {
       this.start();
     }
   }
 
   render() {
+    const { left } = this.props;
     return (
-        <div className="reel" style={{ backgroundPosition: "0px " + this.state.pos + "px" }}></div>
+      <div
+        className="reel"
+        style={{
+          left,
+          backgroundPosition: "45px " + this.state.pos + "px"
+        }}
+      >
+        <div className="gradient" />
+      </div>
     );
   }
 }

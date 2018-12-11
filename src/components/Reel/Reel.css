@@ -1,11 +1,24 @@
-.reel { 
-  display: inline-block;
-  width: 128px;
-  height: 350px;
+.reel {
+  position: relative;
+  top: 20px;
+  width: 213px;
+  max-height: 354px;
   overflow: hidden;
   background: #fff url(./reel.png) repeat-y;
   will-change: backgroundPosition;
   transition: 0.3s background-position ease-in-out;
-  padding: 0 80px;
   transform: translateZ(0);
+}
+
+.gradient {
+  background: linear-gradient(
+    to bottom,
+    rgba(64, 64, 64, 1) 0%,
+    rgba(64, 64, 64, 0) 7%,
+    rgba(64, 64, 64, 0) 93%,
+    rgba(64, 64, 64, 1) 100%
+  );
+  z-index: 9999;
+  position: relative;
+  height: 354px;
 }

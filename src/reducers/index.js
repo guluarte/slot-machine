@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
-import { START_SPINNING, STOP_SPINNING } from "../actions";
-import { SPINNING } from "../actions";
+import { START_SPINNING, STOP_SPINNING, SPINNING } from "../constants";
 
 const machineState = (state = { status: STOP_SPINNING }, action) => {
   switch (action.type) {
