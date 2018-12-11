@@ -41,7 +41,7 @@ import {
   SPINNING_SOUND,
   START_SPINNING
 } from "../constants";
-import "./App.css";
+import "./SlotMachine.css";
 import CoinImage from "./coin.jpg";
 
 const styles = theme => ({
@@ -79,6 +79,8 @@ const styles = theme => ({
 class SlotMachine extends Component {
   constructor(props) {
     super(props);
+    // Lines hold the items after a run
+    // Winning lines hold the lines that have a winning combination
     this.state = {
       lines: { TOP: [], MIDDLE: [], BOTTOM: [] },
       winningLines: [],
@@ -93,10 +95,23 @@ class SlotMachine extends Component {
     };
   }
 
+  /**
+   * Returns an array with all the winning rules
+   * If the rules is false then it didn't match
+   * Otherwise it will return an array with the winning line
+   * the payout and last the name of the rule
+   *
+   * @returns
+   * @memberof SlotMachine
+   */
   getWinningCombinations() {
+
+    // Returns true if the line contains itemName
     const lookForElement = (line, itemName) => {
       return this.state.lines[line].includes(itemName);
     };
+
+    // Returns true if the line hold the same itemName
     const lookForThreeElements = (line, itemName) => {
       for (const element of this.state.lines[line]) {
         if (element !== itemName) {
@@ -105,6 +120,7 @@ class SlotMachine extends Component {
       }
       return true;
     };
+
     const cherrySymbolsOnLine = line => {
       if (!lookForThreeElements(line, CHERRY)) {
         return false;
@@ -158,6 +174,7 @@ class SlotMachine extends Component {
       return [line, WINNING_ANY_COMBINATION_BAR_ON_LINE];
     };
 
+    // Adds the name of the rule at the end
     const addWinningLine = (result, winningLine) => {
       return result ? [...result, winningLine] : false;
     };
@@ -264,6 +281,7 @@ class SlotMachine extends Component {
     if (reel === 3) {
       let currentBalance = this.state.balance;
       const winningLines = [];
+      // Run the rules and get the winning combinations
       const winningCombinations = this.getWinningCombinations().filter(
         w => w instanceof Array
       );
@@ -323,20 +341,13 @@ class SlotMachine extends Component {
       <div className="slot-machine ">
         <h1 className="title">Derivco Estonia Test Slot Machine</h1>
         <Grid container spacing={0}>
-          <Grid item xs={12} lg={7} spacing={16}>
-            <Grid
-              item
-              xs={12}
-              spacing={0}
-              justify="center"
-              alignContent="center"
-              direction="column"
-            >
+          <Grid item xs={12} lg={7}>
+            <Grid item xs={12}>
               <div className="reel-container">
                 <Reel
                   status={status}
                   delay={2000}
-                  left={15}
+                  left={[15, 5]}
                   mode={this.state.mode}
                   position={this.state.landingPositionReel1}
                   symbol={this.state.symbolReel1}
@@ -348,7 +359,7 @@ class SlotMachine extends Component {
                 <Reel
                   status={status}
                   delay={2500}
-                  left={45}
+                  left={[45, 12]}
                   mode={this.state.mode}
                   position={this.state.landingPositionReel2}
                   symbol={this.state.symbolReel2}
@@ -360,7 +371,7 @@ class SlotMachine extends Component {
                 <Reel
                   status={status}
                   delay={3000}
-                  left={75}
+                  left={[75, 21]}
                   mode={this.state.mode}
                   position={this.state.landingPositionReel3}
                   symbol={this.state.symbolReel3}
@@ -378,19 +389,19 @@ class SlotMachine extends Component {
               ))}
 
               {this.state.winningLines.length > 0 && (
-                <audio autoplay="autoplay" className="player" preload="false">
+                <audio autoPlay="autoplay" className="player" preload="false">
                   <source src={WINNING_SOUND} />
                 </audio>
               )}
 
               {status === START_SPINNING && (
-                <audio autoplay="autoplay" className="player" preload="false">
+                <audio autoPlay="autoplay" className="player" preload="false">
                   <source src={SPINNING_SOUND} />
                 </audio>
               )}
             </Grid>
 
-            <Grid item xs={12} spacing={0}>
+            <Grid item xs={12}>
               <DebugArea
                 classes={classes}
                 mode={this.state.mode}
@@ -401,11 +412,11 @@ class SlotMachine extends Component {
             </Grid>
           </Grid>
 
-          <Grid item xs={12} lg={5} spacing={0}>
+          <Grid item xs={12} lg={5}>
             <Paper className={classes.paper}>
               <Grid container spacing={16}>
                 <Grid item xs container>
-                  <Grid item xs={4} spacing={0}>
+                  <Grid item xs={4}>
                     <Button
                       className={classes.arcadeButton}
                       variant="contained"
@@ -420,7 +431,7 @@ class SlotMachine extends Component {
                       SPIN
                     </Button>
                   </Grid>
-                  <Grid item xs={4} spacing={0}>
+                  <Grid item xs={4}>
                     <Button
                       className={classes.insertButton}
                       variant="contained"
@@ -431,7 +442,7 @@ class SlotMachine extends Component {
                       INSERT COIN
                     </Button>
                   </Grid>
-                  <Grid item xs={4} spacing={16}>
+                  <Grid item xs={4}>
                     <TextField
                       id="standard-number"
                       label="Balance $"
@@ -444,7 +455,7 @@ class SlotMachine extends Component {
                     />
                   </Grid>
 
-                  <Grid item xs={12} spacing={0}>
+                  <Grid item xs={12}>
                     {this.state.balance < 1 && status === STOP_SPINNING && (
                       <h3 className="blink_me">Insert More Coins!</h3>
                     )}

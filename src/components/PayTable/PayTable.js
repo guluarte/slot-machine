@@ -25,7 +25,7 @@ import sevenImage from "./7.png";
 import bar3xImage from "./3XBAR.png";
 import bar2xImage from "./2xBAR.png";
 import barImage from "./BAR.png";
-import "../../containers/App.css";
+import "../../containers/SlotMachine.css";
 
 export const PayTable = ({ isWinningPayTableLine }) => <span>
            <h3>Pay-Table</h3>

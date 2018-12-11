@@ -1,23 +1,23 @@
-body, html {
+body,
+html {
   height: 100%;
   background: #fff url(./bg.jpg);
 }
 
 .slot-machine {
-
 }
 
 .title {
-    color: #fff;
-    text-align: center;
-    margin: auto;
-    padding-top: 20px;
-    padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.img-pay-table{
-    max-height: 50px;
-    max-width: 50px;
+.img-pay-table {
+  max-height: 50px;
+  max-width: 50px;
 }
 .reel-container {
   position: relative;
@@ -30,6 +30,13 @@ body, html {
   transition: 0.3s transform, 0.3s -webkit-transform;
   background: url(./slot-bg.png);
   margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .reel-container {
+    max-width: 320px;
+    background-size: 100% 100%;
+  }
 }
 
 .red-line {

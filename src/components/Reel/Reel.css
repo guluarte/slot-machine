@@ -10,6 +10,12 @@
   transform: translateZ(0);
 }
 
+@media only screen and (max-width: 600px) {
+  .reel {
+    width: 100px;
+  }
+}
+
 .gradient {
   background: linear-gradient(
     to bottom,

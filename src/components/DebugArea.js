@@ -48,7 +48,7 @@ export const DebugArea = ({
       {[1, 2, 3].map(r => (
         <Grid item xs={4} key={r}>
           <h3>Reel {r}</h3>
-          <Grid item xs={12} spacing={8} className={classes.gridPadding}>
+          <Grid item xs={12} className={classes.gridPadding}>
             <InputLabel htmlFor={`symbolReel${r}`}>Symbol</InputLabel>
           </Grid>
           <Grid item xs={12}>
