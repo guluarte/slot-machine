@@ -76,7 +76,7 @@ const styles = theme => ({
   }
 });
 
-class SlotMachine extends Component {
+export class SlotMachine extends Component {
   constructor(props) {
     super(props);
     // Lines hold the items after a run
@@ -105,7 +105,6 @@ class SlotMachine extends Component {
    * @memberof SlotMachine
    */
   getWinningCombinations() {
-
     // Returns true if the line contains itemName
     const lookForElement = (line, itemName) => {
       return this.state.lines[line].includes(itemName);
@@ -338,8 +337,8 @@ class SlotMachine extends Component {
   render() {
     const { status, classes } = this.props;
     return (
-      <div className="slot-machine ">
-        <h1 className="title">Derivco Estonia Test Slot Machine</h1>
+      <div className="slot-machine">
+        <h1 className="title">Test Slot Machine</h1>
         <Grid container spacing={0}>
           <Grid item xs={12} lg={7}>
             <Grid item xs={12}>
@@ -402,6 +401,60 @@ class SlotMachine extends Component {
             </Grid>
 
             <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Grid container spacing={16}>
+                  <Grid item xs container>
+                    <Grid item xs={4}>
+                      <Button
+                        className={classes.arcadeButton}
+                        variant="contained"
+                        color="primary"
+                        id="spintBtn"
+                        onClick={this.onStartSpinning.bind(this)}
+                        disabled={
+                          status !== STOP_SPINNING || this.state.balance < 1
+                            ? true
+                            : false
+                        }
+                      >
+                        SPIN
+                      </Button>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <Button
+                        className={classes.insertButton}
+                        variant="contained"
+                        color="primary"
+                        onClick={this.onInsertCoin.bind(this)}
+                        disabled={status !== STOP_SPINNING ? true : false}
+                      >
+                        INSERT COIN
+                      </Button>
+                    </Grid>
+                    <Grid item xs={2} md={4}>
+                      <TextField
+                        id="standard-number"
+                        label="Balance"
+                        value={this.state.balance}
+                        onChange={this.handleBalanceChange.bind(this)}
+                        type="number"
+                        InputLabelProps={{ shrink: true }}
+                        disabled={status !== STOP_SPINNING ? true : false}
+                        margin="normal"
+                      />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      {this.state.balance < 1 && status === STOP_SPINNING && (
+                        <h3 className="blink_me">Insert More Coins!</h3>
+                      )}
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
               <DebugArea
                 classes={classes}
                 mode={this.state.mode}
@@ -412,54 +465,10 @@ class SlotMachine extends Component {
             </Grid>
           </Grid>
 
-          <Grid item xs={12} lg={5}>
+          <Grid item xs={12} lg={5} md={5}>
             <Paper className={classes.paper}>
               <Grid container spacing={16}>
                 <Grid item xs container>
-                  <Grid item xs={4}>
-                    <Button
-                      className={classes.arcadeButton}
-                      variant="contained"
-                      color="primary"
-                      onClick={this.onStartSpinning.bind(this)}
-                      disabled={
-                        status !== STOP_SPINNING || this.state.balance < 1
-                          ? true
-                          : false
-                      }
-                    >
-                      SPIN
-                    </Button>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Button
-                      className={classes.insertButton}
-                      variant="contained"
-                      color="primary"
-                      onClick={this.onInsertCoin.bind(this)}
-                      disabled={status !== STOP_SPINNING ? true : false}
-                    >
-                      INSERT COIN
-                    </Button>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      id="standard-number"
-                      label="Balance $"
-                      value={this.state.balance}
-                      onChange={this.handleBalanceChange.bind(this)}
-                      type="number"
-                      InputLabelProps={{ shrink: true }}
-                      disabled={status !== STOP_SPINNING ? true : false}
-                      margin="normal"
-                    />
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    {this.state.balance < 1 && status === STOP_SPINNING && (
-                      <h3 className="blink_me">Insert More Coins!</h3>
-                    )}
-                  </Grid>
                   <PayTable
                     isWinningPayTableLine={this.isWinningPayTableLine.bind(
                       this

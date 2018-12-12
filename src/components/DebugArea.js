@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
 import {
   CHERRY,
@@ -32,18 +34,27 @@ export const DebugArea = ({
         <h3>Debug Area</h3>
       </Grid>
       <Grid item xs={12}>
-        <InputLabel htmlFor="age-simple">Mode</InputLabel>
+        <InputLabel htmlFor="mode">Mode</InputLabel>
       </Grid>
       <Grid item xs={12}>
-        <Select
-          value={mode}
-          onChange={handleChange}
-          inputProps={{ name: "mode" }}
-          disabled={enabled ? false : true}
-        >
-          <MenuItem value={RANDOM}>{RANDOM}</MenuItem>
-          <MenuItem value={FIXED}>{FIXED}</MenuItem>
-        </Select>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={mode === FIXED}
+              value={mode}
+              disabled={enabled ? false : true}
+              onChange={event => {
+                handleChange({
+                  target: {
+                    name: "mode",
+                    value: event.target.checked ? FIXED : RANDOM
+                  }
+                });
+              }}
+            />
+          }
+          label={mode}
+        />
       </Grid>
       {[1, 2, 3].map(r => (
         <Grid item xs={4} key={r}>

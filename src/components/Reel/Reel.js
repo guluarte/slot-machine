@@ -21,7 +21,6 @@ export class Reel extends Component {
     this.delay = props.delay;
     this.intervalMs = props.intervalMs;
     this.onFinish = props.onFinish;
-    this.resize();
   }
 
   componentDidMount() {
