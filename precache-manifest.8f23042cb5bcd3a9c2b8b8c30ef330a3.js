@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/slot-machine/static/css/main.551db583.chunk.css"
   },
   {
-    "revision": "93ee85bec08fb857d0d7e052b5c5dcbb",
+    "revision": "0fae8c8a8fcf355a7c6c4381ac5e08f5",
     "url": "/slot-machine/index.html"
   }
 ];

@@ -7,10 +7,10 @@
   "runtime~main.js": "/slot-machine/static/js/runtime~main.2d931611.js",
   "runtime~main.js.map": "/slot-machine/static/js/runtime~main.2d931611.js.map",
   "static/media/Cherry.png": "/slot-machine/static/media/Cherry.565a5779.png",
-  "static/media/SlotMachine.css": "/slot-machine/static/media/slot-bg.2613183a.png",
+  "static/media/SlotMachine.css": "/slot-machine/static/media/bg.f02b815c.jpg",
   "static/media/Reel.css": "/slot-machine/static/media/reel.0fcee238.png",
   "static/css/main.551db583.chunk.css.map": "/slot-machine/static/css/main.551db583.chunk.css.map",
   "index.html": "/slot-machine/index.html",
-  "precache-manifest.19230dfbe3e24901072dc6950231c7ec.js": "/slot-machine/precache-manifest.19230dfbe3e24901072dc6950231c7ec.js",
+  "precache-manifest.8f23042cb5bcd3a9c2b8b8c30ef330a3.js": "/slot-machine/precache-manifest.8f23042cb5bcd3a9c2b8b8c30ef330a3.js",
   "service-worker.js": "/slot-machine/service-worker.js"
 }
