@@ -16,9 +16,9 @@ const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>
-        <MuiThemeProvider theme={casinoTheme}>
+    <MuiThemeProvider theme={casinoTheme}>
       <SlotMachine />
-    </MuiThemeProvider>cc
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById("root")
 );
