@@ -20,19 +20,19 @@ self.__precacheManifest = [
     "url": "/slot-machine/static/js/runtime~main.2d931611.js"
   },
   {
-    "revision": "150f38dac57823fed100",
-    "url": "/slot-machine/static/js/main.150f38da.chunk.js"
+    "revision": "81c9c6993292cccc3600",
+    "url": "/slot-machine/static/js/main.81c9c699.chunk.js"
   },
   {
     "revision": "9c0cb73fa93f15ff61ef",
     "url": "/slot-machine/static/js/1.9c0cb73f.chunk.js"
   },
   {
-    "revision": "150f38dac57823fed100",
+    "revision": "81c9c6993292cccc3600",
     "url": "/slot-machine/static/css/main.551db583.chunk.css"
   },
   {
-    "revision": "0fae8c8a8fcf355a7c6c4381ac5e08f5",
+    "revision": "f7091406514484644bac699b8226ac5b",
     "url": "/slot-machine/index.html"
   }
 ];
