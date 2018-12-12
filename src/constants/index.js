@@ -22,7 +22,7 @@ export const WINNING_SEVEN_SYMBOLS_ON_LINE = 150;
 
 export const WINNING_SEVEN_CHERRY_ON_LINE = 75;
 
-export const WINNING_ANY_COMBINATION_BAR_ON_LINE = 75;
+export const WINNING_ANY_COMBINATION_BAR_ON_LINE = 5;
 
 export const WINNING_BAR3X = 50;
 export const WINNING_BAR2X = 20;
