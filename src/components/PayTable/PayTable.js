@@ -102,6 +102,7 @@ export const PayTable = ({ isWinningPayTableLine }) => (
         <ListItemText primary="Any combination of CHERRY and 7 on any line 75" />
         <img src={cherryImage} className="img-pay-table" alt={CHERRY} />
         <img src={sevenImage} className="img-pay-table" alt={SEVEN} />
+        <img src={cherryImage} className="img-pay-table" alt={CHERRY} />
       </ListItem>
       <Divider />
 

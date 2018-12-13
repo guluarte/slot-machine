@@ -67,7 +67,7 @@ export const DebugArea = ({
               value={parentState[`symbolReel${r}`]}
               onChange={handleChange}
               inputProps={{ name: `symbolReel${r}` }}
-              disabled={enabled ? false : true}
+              disabled={enabled && mode === FIXED ? false : true}
             >
               <MenuItem value={BAR}>{BAR}</MenuItem>
               <MenuItem value={BAR2X}>{BAR2X}</MenuItem>
@@ -86,7 +86,7 @@ export const DebugArea = ({
               value={parentState[`landingPositionReel${r}`]}
               onChange={handleChange}
               inputProps={{ name: `landingPositionReel${r}` }}
-              disabled={enabled ? false : true}
+              disabled={enabled && mode === FIXED ? false : true}
             >
               <MenuItem value={TOP}>{TOP}</MenuItem>
               <MenuItem value={MIDDLE}>{MIDDLE}</MenuItem>

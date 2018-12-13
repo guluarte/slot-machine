@@ -105,19 +105,12 @@ export class SlotMachine extends Component {
    * @memberof SlotMachine
    */
   getWinningCombinations() {
-    // Returns true if the line contains itemName
-    const lookForElement = (line, itemName) => {
-      return this.state.lines[line].includes(itemName);
-    };
-
     // Returns true if the line hold the same itemName
     const lookForThreeElements = (line, itemName) => {
-      for (const element of this.state.lines[line]) {
-        if (element !== itemName) {
-          return false;
-        }
-      }
-      return true;
+      return this.state.lines[line].filter(item => item === itemName).length >=
+        3
+        ? true
+        : false;
     };
 
     const cherrySymbolsOnLine = line => {
@@ -141,11 +134,17 @@ export class SlotMachine extends Component {
       return [line, WINNING_SEVEN_SYMBOLS_ON_LINE];
     };
 
-    const anyCombinationOfCherryAndSeven = line => {
-      const hasCherry = lookForElement(line, CHERRY);
-      const hasSeven = lookForElement(line, SEVEN);
+    const anyCombinationOfCherriesAndSeven = line => {
+      const numCherries = this.state.lines[line].filter(item => item === CHERRY)
+        .length;
+      const numSevens = this.state.lines[line].filter(item => item === SEVEN)
+        .length;
 
-      if (hasCherry && hasSeven) {
+      const winningCombinations =
+        (numCherries === 2 && numSevens === 1) ||
+        (numCherries === 1 && numSevens === 2);
+
+      if (winningCombinations) {
         return [line, WINNING_SEVEN_CHERRY_ON_LINE];
       }
       return false;
@@ -204,15 +203,15 @@ export class SlotMachine extends Component {
         WINNING_PAY_TABLE_SEVENS_ANY_LINE
       ),
       addWinningLine(
-        anyCombinationOfCherryAndSeven(TOP),
+        anyCombinationOfCherriesAndSeven(TOP),
         WINNING_PAY_TABLE_CHERRY_AND_SEVEN
       ),
       addWinningLine(
-        anyCombinationOfCherryAndSeven(MIDDLE),
+        anyCombinationOfCherriesAndSeven(MIDDLE),
         WINNING_PAY_TABLE_CHERRY_AND_SEVEN
       ),
       addWinningLine(
-        anyCombinationOfCherryAndSeven(BOTTOM),
+        anyCombinationOfCherriesAndSeven(BOTTOM),
         WINNING_PAY_TABLE_CHERRY_AND_SEVEN
       ),
       addWinningLine(
@@ -268,7 +267,6 @@ export class SlotMachine extends Component {
 
   onReelFinish(reel, top, middle, bottom) {
     this.setState({
-      ...this.state,
       lines: {
         TOP: [...this.state.lines.TOP, top],
         MIDDLE: [...this.state.lines.MIDDLE, middle],
@@ -278,22 +276,24 @@ export class SlotMachine extends Component {
     });
 
     if (reel === 3) {
-      let currentBalance = this.state.balance;
+      let wonAmount = 0;
       const winningLines = [];
       // Run the rules and get the winning combinations
       const winningCombinations = this.getWinningCombinations().filter(
         w => w instanceof Array
       );
       for (const winningCombination of winningCombinations) {
-        currentBalance += winningCombination[1];
+        wonAmount += winningCombination[1];
         winningLines.push(winningCombination);
       }
-      this.setState({
-        ...this.state,
-        balance: currentBalance,
+      // set the new balance
+      // and the winning lines
+      // and reset the item positions
+      this.setState(state => ({
+        balance: state.balance + wonAmount,
         winningLines,
         lines: { TOP: [], MIDDLE: [], BOTTOM: [] }
-      });
+      }));
     }
   }
 
@@ -315,17 +315,17 @@ export class SlotMachine extends Component {
 
   onStartSpinning() {
     const { startSpinning } = this.props;
-    let balance = this.state.balance - 1;
-    this.setState({ ...this.state, balance, winningLines: [] });
+    this.setState(state => ({
+      balance: state.balance - 1,
+      winningLines: []
+    }));
     startSpinning(3500);
   }
 
   onInsertCoin() {
-    let currentBalance = this.state.balance + 1;
-    this.setState({
-      ...this.state,
-      balance: currentBalance
-    });
+    this.setState(state => ({
+      balance: state.balance + 1
+    }));
   }
 
   isWinningPayTableLine(name) {
