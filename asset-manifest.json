@@ -1,9 +1,9 @@
 {
   "main.css": "/slot-machine/static/css/main.551db583.chunk.css",
-  "main.js": "/slot-machine/static/js/main.c0464483.chunk.js",
-  "main.js.map": "/slot-machine/static/js/main.c0464483.chunk.js.map",
-  "static/js/1.9c0cb73f.chunk.js": "/slot-machine/static/js/1.9c0cb73f.chunk.js",
-  "static/js/1.9c0cb73f.chunk.js.map": "/slot-machine/static/js/1.9c0cb73f.chunk.js.map",
+  "main.js": "/slot-machine/static/js/main.1b363bc3.chunk.js",
+  "main.js.map": "/slot-machine/static/js/main.1b363bc3.chunk.js.map",
+  "static/js/1.6d11b7f6.chunk.js": "/slot-machine/static/js/1.6d11b7f6.chunk.js",
+  "static/js/1.6d11b7f6.chunk.js.map": "/slot-machine/static/js/1.6d11b7f6.chunk.js.map",
   "runtime~main.js": "/slot-machine/static/js/runtime~main.2d931611.js",
   "runtime~main.js.map": "/slot-machine/static/js/runtime~main.2d931611.js.map",
   "static/media/Cherry.png": "/slot-machine/static/media/Cherry.565a5779.png",
@@ -11,6 +11,6 @@
   "static/media/Reel.css": "/slot-machine/static/media/reel.0fcee238.png",
   "static/css/main.551db583.chunk.css.map": "/slot-machine/static/css/main.551db583.chunk.css.map",
   "index.html": "/slot-machine/index.html",
-  "precache-manifest.085a01a8d6c05bcc5d1253b3f7f236f7.js": "/slot-machine/precache-manifest.085a01a8d6c05bcc5d1253b3f7f236f7.js",
+  "precache-manifest.bced5b1015c73083fde1e3595a5f5953.js": "/slot-machine/precache-manifest.bced5b1015c73083fde1e3595a5f5953.js",
   "service-worker.js": "/slot-machine/service-worker.js"
 }
