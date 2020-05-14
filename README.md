@@ -1,4 +1,4 @@
-# Derivco Estonia Test Slot Machine
+#  Test Slot Machine
 
 This project was made in react, using redux and material ui, to run it run `npm install` and then `npm start` to start the development server.
 
